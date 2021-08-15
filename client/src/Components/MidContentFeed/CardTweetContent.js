@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DashOutlined } from '@ant-design/icons';
 import { Avatar, Image } from 'antd';
-import warframe from '../../Image/Warframe0003.jpg';
 import { GetTheTweets } from '../../Api/index';
 
 function CardTweetContent({}) {
   const [TweetsList, setTweetsList] = useState([]);
-  GetTheTweets().then((e) => setTweetsList(e.data));
+  useEffect(() => {
+    GetTheTweets().then((e) => setTweetsList(e.data));
+  }, []);
   if (!TweetsList) {
     return <div style={{ width: '100%', minHeight: '100%' }}>Loading</div>;
   } else {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import { Card } from 'antd';
 import { GoogleLogin } from 'react-google-login';
@@ -6,8 +6,9 @@ import { Button } from 'antd';
 import { GooglePlusCircleFilled } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
-function LoginAuth({ dataAuth }) {
+function LoginAuth() {
   const history = useHistory();
+  const [loginData, setLoginData] = useState({ username: '', date: Date.now() });
   const GoogleOnSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
