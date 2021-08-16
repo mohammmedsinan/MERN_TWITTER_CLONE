@@ -12,7 +12,7 @@ function AvatarTwitter() {
               width: '27%',
               height: '140px',
               backgroundImage:
-                'url(https://pbs.twimg.com/profile_images/1396778415269761024/KhPw6ZzX_400x400.jpg)',
+                'url(https://pbs.twimg.com/profile_images/1415349540329242629/G5-newzQ_400x400.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderRadius: '100%',

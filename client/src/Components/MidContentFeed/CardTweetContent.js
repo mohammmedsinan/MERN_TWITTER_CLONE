@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { DashOutlined } from '@ant-design/icons';
 import { Avatar, Image } from 'antd';
-import { GetTheTweets } from '../../Api/index';
+import { GetTheTweets, GetYourProfile } from '../../Api/index';
+import { Link } from 'react-router-dom';
 
 function CardTweetContent({}) {
   const [TweetsList, setTweetsList] = useState([]);
@@ -32,8 +33,10 @@ function CardTweetContent({}) {
               }}
             >
               <div style={{ display: 'flex' }}>
-                <Avatar size="large" src={TweetsInfo.Avatar} />
-                <p style={{ marginLeft: '15px', fontSize: '16px' }}>{TweetsInfo.username}</p>
+                <Link style={{ display: 'flex', color: 'white' }}>
+                  <Avatar size="large" src={TweetsInfo.Avatar} />
+                  <p style={{ marginLeft: '15px', fontSize: '16px' }}>{TweetsInfo.username}</p>
+                </Link>
                 <div style={{ display: 'flex', alignItems: 'baseline' }}>
                   <p
                     style={{

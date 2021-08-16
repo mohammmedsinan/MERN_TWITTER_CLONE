@@ -2,7 +2,8 @@ import React from 'react';
 import AvatarTwitter from './AvatarTwitter';
 import Headertwitter from './Headertwitter';
 import ImageTwitter from './imageTwitter';
-import SectionsTwitter from './sectionsTwitter';
+import SectionsTwitter from './SectionsTwitter';
+import './style.scss';
 
 function index() {
   return (

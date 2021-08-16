@@ -5,17 +5,39 @@ import { GoogleLogin } from 'react-google-login';
 import { Button } from 'antd';
 import { GooglePlusCircleFilled } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { PostYourProfile } from '../../../Api/index';
 
 function LoginAuth() {
   const history = useHistory();
-  const [loginData, setLoginData] = useState({ username: '', date: Date.now() });
+  const [loginData, setLoginData] = useState({
+    username: '',
+    Avatar: '',
+    Followers: 0,
+    Following: 0,
+    YourTweets: [],
+    Bio: '',
+    CoverImg: '',
+    Date: Date.now(),
+  });
   const GoogleOnSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
     const data = { ...result, token };
+    setLoginData({});
     try {
       localStorage.setItem('profile', JSON.stringify(data));
-      history.push('/');
+      await PostYourProfile({
+        username: res.profileObj.name,
+        Avatar: res.profileObj.imageUrl,
+        Followers: 0,
+        Following: 0,
+        YourTweets: [],
+        Bio: 'This is my Bio',
+        CoverImg: '',
+      })
+        .then((e) => console.log(e))
+        .then(() => history.push('/'));
+      console.log(loginData);
     } catch (err) {
       console.log(err);
     }
