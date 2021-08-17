@@ -4,6 +4,6 @@ import { PostProfile, GetProfile } from '../cotrolerRoutes/ProfileController.js'
 const router = express.Router();
 
 router.post('/', PostProfile);
-router.get('/', GetProfile);
+router.get('/:username', GetProfile);
 
 export default router;

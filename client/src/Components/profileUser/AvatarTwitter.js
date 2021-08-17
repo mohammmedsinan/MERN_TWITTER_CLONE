@@ -1,8 +1,11 @@
 import React from 'react';
 import { CalendarOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import { useParams } from 'react-router-dom';
 
-function AvatarTwitter() {
+function AvatarTwitter(Profile) {
+  const Params = useParams();
+  console.log(Params.username);
   return (
     <div style={{ marginTop: '140px', zIndex: '2', position: 'relative', padding: '0px 20px' }}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -11,8 +14,7 @@ function AvatarTwitter() {
             style={{
               width: '27%',
               height: '140px',
-              backgroundImage:
-                'url(https://pbs.twimg.com/profile_images/1415349540329242629/G5-newzQ_400x400.jpg)',
+              backgroundImage: `url(${Profile.Avatar})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderRadius: '100%',
@@ -20,6 +22,9 @@ function AvatarTwitter() {
               marginBottom: '10px',
             }}
           />
+          {Params.username === Profile.username
+            ? console.log('matching')
+            : console.log('dose not match')}
           <Button
             type="ghost"
             style={{
@@ -42,7 +47,7 @@ function AvatarTwitter() {
             lineHeight: '1',
           }}
         >
-          Train_Heartent
+          {Profile.username}
         </p>
         <p
           style={{
@@ -53,21 +58,18 @@ function AvatarTwitter() {
             marginBottom: '10px',
           }}
         >
-          @Train_Heartent
+          @{Profile.username}
         </p>
-        <p style={{ fontSize: '14px' }}>
-          -Full stack programmer -u can say I fall in love with books -ازلي و عدمي معا استقراطي
-          برجوازي -Speaking three languages (English , Arabic , Spanish)
-        </p>
+        <p style={{ fontSize: '14px' }}>{Profile.Bio} </p>
         <p style={{ color: '#6e767d' }}>
           <CalendarOutlined /> Joined October 2020
         </p>
         <div style={{ display: 'flex' }}>
           <p>
-            8 <span style={{ color: '#6e767d' }}>Following</span>
+            {Profile.Following} <span style={{ color: '#6e767d' }}>Following</span>
           </p>
           <p style={{ lineHeight: '2', marginLeft: '20px' }}>
-            13 <span style={{ color: '#6e767d' }}>Followers</span>
+            {Profile.Followers} <span style={{ color: '#6e767d' }}>Followers</span>
           </p>
         </div>
       </div>

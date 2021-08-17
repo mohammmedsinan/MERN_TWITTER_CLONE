@@ -16,7 +16,7 @@ export const PostProfile = async (req, res, next) => {
 };
 
 export const GetProfile = (req, res) => {
-  AccModal.find({}, (error, data) => {
+  AccModal.find({ username: req.params.username }, (error, data) => {
     res.json(data);
   });
 };

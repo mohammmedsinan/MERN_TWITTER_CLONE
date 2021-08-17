@@ -33,7 +33,10 @@ function CardTweetContent({}) {
               }}
             >
               <div style={{ display: 'flex' }}>
-                <Link style={{ display: 'flex', color: 'white' }}>
+                <Link
+                  style={{ display: 'flex', color: 'white' }}
+                  to={`/profile/${TweetsInfo.username}`}
+                >
                   <Avatar size="large" src={TweetsInfo.Avatar} />
                   <p style={{ marginLeft: '15px', fontSize: '16px' }}>{TweetsInfo.username}</p>
                 </Link>

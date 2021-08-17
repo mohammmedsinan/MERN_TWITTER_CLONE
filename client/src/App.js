@@ -13,7 +13,7 @@ function App() {
       <Switch>
         <ProtectedRoutes exact path="/" component={TwitterFrontPage} />
         <Route path="/Auth/Login" component={LoginAuth} />
-        <Route path="/Profile" component={Profile} />
+        <Route path="/Profile/:username" component={Profile} />
         <Route path="*" component={PageNotFind} />
       </Switch>
     </>
