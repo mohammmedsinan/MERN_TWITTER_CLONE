@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 function AvatarTwitter(Profile) {
   const Params = useParams();
-  console.log(Params.username);
+  const storge = JSON.parse(localStorage.getItem('profile'));
   return (
     <div style={{ marginTop: '140px', zIndex: '2', position: 'relative', padding: '0px 20px' }}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -22,21 +22,22 @@ function AvatarTwitter(Profile) {
               marginBottom: '10px',
             }}
           />
-          {Params.username === Profile.username
-            ? console.log('matching')
-            : console.log('dose not match')}
-          <Button
-            type="ghost"
-            style={{
-              width: '110px',
-              color: 'white',
-              borderRadius: '20px',
-              height: '35px',
-              fontSize: '15px',
-            }}
-          >
-            Edit Profile
-          </Button>
+          {Params.username === storge.name ? (
+            <Button
+              type="ghost"
+              style={{
+                width: '110px',
+                color: 'white',
+                borderRadius: '20px',
+                height: '35px',
+                fontSize: '15px',
+              }}
+            >
+              Edit Profile
+            </Button>
+          ) : (
+            ''
+          )}
         </div>
         <p
           style={{

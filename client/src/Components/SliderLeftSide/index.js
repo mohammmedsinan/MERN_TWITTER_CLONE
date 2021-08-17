@@ -1,6 +1,8 @@
 import React from 'react';
 import Slides from './Slides';
 import Footer from './Footer';
+import './style.css';
+import { Button } from 'antd';
 import {
   HomeFilled,
   TwitterOutlined,
@@ -12,13 +14,11 @@ import {
   UserOutlined,
   SmallDashOutlined,
 } from '@ant-design/icons';
-import './style.css';
-import { Button } from 'antd';
 
 function index() {
   const slides = [
-    { Logo: <TwitterOutlined style={{ fontSize: '35px' }} />, SlideName: null },
-    { Logo: <HomeFilled />, SlideName: 'Home' },
+    { Logo: <TwitterOutlined style={{ fontSize: '35px' }} />, SlideName: null, PathUrl: '/' },
+    { Logo: <HomeFilled />, SlideName: 'Home', PathUrl: '/' },
     { Logo: <BorderlessTableOutlined />, SlideName: 'Explore' },
     { Logo: <BellOutlined />, SlideName: 'Notification' },
     { Logo: <MailOutlined />, SlideName: 'Message' },

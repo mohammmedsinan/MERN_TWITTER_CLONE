@@ -13,6 +13,9 @@ const Tweeting = mongoose.Schema({
   Avatar: {
     type: String,
   },
+  RealName: {
+    type: String,
+  },
   Date: {
     type: Date,
     default: Date.now(),

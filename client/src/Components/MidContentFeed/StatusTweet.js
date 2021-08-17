@@ -10,17 +10,21 @@ import {
   FileGifOutlined,
 } from '@ant-design/icons';
 import { Upload } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 const { TextArea } = Input;
 function StatusTweet() {
+  const history = useHistory();
   const [tweetContent, setTweetContent] = useState({
     username: '',
     TweetText: '',
     Img: '',
     Avatar: '',
+    RealName: '',
     Date: Date.now(),
   });
   const [data, setData] = useState(JSON.parse(localStorage.getItem('profile')));
+  console.log(data);
   useEffect(() => {
     setTweetContent({ ...tweetContent, Avatar: data.imageUrl, username: data.name });
   }, [tweetContent.username]);
@@ -44,7 +48,12 @@ function StatusTweet() {
   return (
     <div style={{ padding: '14px 20px', display: 'flex', borderBottom: 'solid 1px #2f3336' }}>
       <div>
-        <Avatar size="large" src={data.imageUrl} />
+        <Avatar
+          size="large"
+          src={data.imageUrl}
+          onClick={() => history.push(`/profile/${data.name}`)}
+          style={{ cursor: 'pointer' }}
+        />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <TextArea

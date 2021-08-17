@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image } from 'antd';
 
-function imageTwitter() {
-  const img = 'https://pbs.twimg.com/profile_banners/3331605652/1522573833/1500x500';
+function imageTwitter(Cover) {
+  const img = Cover;
   return (
     <div style={{ position: 'relative', zIndex: '1' }}>
       <img

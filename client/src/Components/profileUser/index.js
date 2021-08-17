@@ -18,10 +18,9 @@ function index({ match }) {
       {ProfileInformation &&
         ProfileInformation.map((Profile) => {
           return (
-            <div style={{ width: '45%' }}>
+            <div style={{ width: '45%' }} key={Profile._id}>
               <Headertwitter />
-              {console.log(Profile)}
-              <ImageTwitter />
+              <ImageTwitter Cover={Profile.CoverImg} />
               <AvatarTwitter {...Profile} />
               <SectionsTwitter />
             </div>
