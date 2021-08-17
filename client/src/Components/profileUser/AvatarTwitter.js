@@ -7,6 +7,7 @@ import { Input, Upload } from 'antd';
 import { UpdateYourProfile } from '../../Api/index';
 
 function AvatarTwitter(Profile) {
+  console.log(Profile.Exuss);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const ls = JSON.parse(localStorage.getItem('profile'));
   const [Info, setInfo] = useState({
@@ -22,7 +23,13 @@ function AvatarTwitter(Profile) {
 
   const handleOk = () => {
     setIsModalVisible(false);
-    UpdateYourProfile(Info).then((e) => console.log(e.data));
+    UpdateYourProfile(Info)
+      .then((e) => console.log(e.data))
+      .then(() =>
+        setTimeout(() => {
+          Profile.setExuss(Profile.Exuss + 1);
+        }, 1000),
+      );
   };
 
   const handleCancel = () => {

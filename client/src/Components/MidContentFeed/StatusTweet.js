@@ -1,6 +1,6 @@
 import { Avatar, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { PostTheTweets } from '../../Api/index';
+import { PostTheTweets, GetYourProfile } from '../../Api/index';
 import { Button } from 'antd';
 import {
   FileImageOutlined,
@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 
 const { TextArea } = Input;
 function StatusTweet() {
+  const [Info, setInfo] = useState([]);
   const history = useHistory();
   const [tweetContent, setTweetContent] = useState({
     username: '',
@@ -45,12 +46,18 @@ function StatusTweet() {
       });
     },
   };
+  useEffect(() => {
+    GetYourProfile(`${data.name}`)
+      .then((e) => e.data)
+      .then((e) => e.map((e) => setInfo(e)));
+  }, []);
+  console.log(Info);
   return (
     <div style={{ padding: '14px 20px', display: 'flex', borderBottom: 'solid 1px #2f3336' }}>
       <div>
         <Avatar
           size="large"
-          src={data.imageUrl}
+          src={Info.Avatar}
           onClick={() => history.push(`/profile/${data.name}`)}
           style={{ cursor: 'pointer' }}
         />

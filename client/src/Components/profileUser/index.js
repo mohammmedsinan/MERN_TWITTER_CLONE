@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { GetYourProfile } from '../../Api';
 import AvatarTwitter from './AvatarTwitter';
@@ -8,25 +9,39 @@ import './style.scss';
 
 function index({ match }) {
   const [ProfileInformation, setProfileInformation] = useState();
+  const [Exuss, setExuss] = useState(0);
   useEffect(() => {
     GetYourProfile(match.params.username)
       .then((e) => e.data)
       .then((ProfileInfo) => setProfileInformation(ProfileInfo));
-  }, [match.params.username]);
+  }, [match.params.username, Exuss]);
+
   return (
-    <>
-      {ProfileInformation &&
+    <div style={{ width: '45%' }}>
+      {ProfileInformation ? (
         ProfileInformation.map((Profile) => {
+          let MoreInfo = { ...Profile, Exuss, setExuss };
           return (
-            <div style={{ width: '45%' }} key={Profile._id}>
+            <>
               <Headertwitter />
               <ImageTwitter Cover={Profile.CoverImg} />
-              <AvatarTwitter {...Profile} />
+              <AvatarTwitter {...MoreInfo} />
               <SectionsTwitter />
-            </div>
+            </>
           );
-        })}
-    </>
+        })
+      ) : (
+        <Spin
+          size="large"
+          style={{
+            display: 'grid',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        />
+      )}
+    </div>
   );
 }
 
