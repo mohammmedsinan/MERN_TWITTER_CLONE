@@ -1,11 +1,70 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CalendarOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useParams } from 'react-router-dom';
+import Modal from 'antd/lib/modal/Modal';
+import { Input, Upload } from 'antd';
+import { UpdateYourProfile } from '../../Api/index';
 
 function AvatarTwitter(Profile) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const ls = JSON.parse(localStorage.getItem('profile'));
+  const [Info, setInfo] = useState({
+    Avatar: '',
+    CoverImg: '',
+    username: '',
+    Bio: '',
+    key: ls.name,
+  });
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+    UpdateYourProfile(Info).then((e) => console.log(e.data));
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const Params = useParams();
   const storge = JSON.parse(localStorage.getItem('profile'));
+  const propsUpload = {
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    listType: 'picture',
+    beforeUpload(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (ew) => {
+          const img = document.createElement('img');
+          img.src = reader.result;
+          img.onload = (e) => {
+            setInfo({ ...Info, Avatar: ew.target.result });
+          };
+        };
+      });
+    },
+  };
+  const propsUpload2 = {
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    listType: 'picture',
+    beforeUpload(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (ew) => {
+          const img = document.createElement('img');
+          img.src = reader.result;
+          img.onload = (e) => {
+            setInfo({ ...Info, CoverImg: ew.target.result });
+          };
+        };
+      });
+    },
+  };
   return (
     <div style={{ marginTop: '140px', zIndex: '2', position: 'relative', padding: '0px 20px' }}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -23,18 +82,48 @@ function AvatarTwitter(Profile) {
             }}
           />
           {Params.username === storge.name ? (
-            <Button
-              type="ghost"
-              style={{
-                width: '110px',
-                color: 'white',
-                borderRadius: '20px',
-                height: '35px',
-                fontSize: '15px',
-              }}
-            >
-              Edit Profile
-            </Button>
+            <>
+              <Button
+                onClick={showModal}
+                type="ghost"
+                style={{
+                  width: '110px',
+                  color: 'white',
+                  borderRadius: '20px',
+                  height: '35px',
+                  fontSize: '15px',
+                }}
+              >
+                Edit Profile
+              </Button>
+              <Modal
+                title="Basic Modal"
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <Input
+                  placeholder="Change Your Name"
+                  onChange={(e) => setInfo({ ...Info, username: e.target.value })}
+                  value={Info.username}
+                />
+                <Input
+                  placeholder="Change Your Bio"
+                  onChange={(e) => setInfo({ ...Info, Bio: e.target.value })}
+                  value={Info.Bio}
+                />
+                <Upload {...propsUpload}>
+                  <Button style={{ marginTop: '10px', display: 'block', width: '200px' }}>
+                    Change The Avatar
+                  </Button>
+                </Upload>
+                <Upload {...propsUpload2}>
+                  <Button style={{ marginTop: '10px', display: 'block', width: '200px' }}>
+                    Change Cover
+                  </Button>
+                </Upload>
+              </Modal>
+            </>
           ) : (
             ''
           )}

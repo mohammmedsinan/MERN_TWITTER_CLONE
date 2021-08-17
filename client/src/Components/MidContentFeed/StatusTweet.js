@@ -102,7 +102,7 @@ function StatusTweet() {
             size="large"
             onClick={() =>
               tweetContent.TweetText &&
-              PostTheTweets(tweetContent).then((e) => setTweetContent({ Img: '' }))
+              PostTheTweets(tweetContent).then(() => setTweetContent({ Img: '' }))
             }
           >
             Tweet

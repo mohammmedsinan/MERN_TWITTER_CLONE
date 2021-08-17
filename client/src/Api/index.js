@@ -6,3 +6,4 @@ export const PostTheTweets = (Tweets) => axios.post(`${baseURL}/Tweets`, Tweets)
 //Profile Info Fetching
 export const GetYourProfile = (params) => axios.get(`${baseURL}/profile/${params}`);
 export const PostYourProfile = (Profile) => axios.post(`${baseURL}/profile`, Profile);
+export const UpdateYourProfile = (Profile) => axios.put(`${baseURL}/profile`, Profile);

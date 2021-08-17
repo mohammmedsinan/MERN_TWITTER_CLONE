@@ -1,15 +1,19 @@
 import React from 'react';
-import { Image } from 'antd';
 
 function imageTwitter(Cover) {
-  const img = Cover;
   return (
     <div style={{ position: 'relative', zIndex: '1' }}>
-      <img
-        src={img}
-        width="100%"
-        style={{ height: 'auto', maxHeight: '200px', position: 'absolute', zIndex: '0' }}
-      />
+      <div
+        style={{
+          height: '200px',
+          position: 'absolute',
+          zIndex: '0',
+          backgroundImage: `url(${Cover.Cover})`,
+          width: '100%',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      ></div>
     </div>
   );
 }
