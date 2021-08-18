@@ -25,11 +25,7 @@ function AvatarTwitter(Profile) {
     setIsModalVisible(false);
     UpdateYourProfile(Info)
       .then((e) => console.log(e.data))
-      .then(() =>
-        setTimeout(() => {
-          Profile.setExuss(Profile.Exuss + 1);
-        }, 1000),
-      );
+      .then(() => Profile.setExuss(!Profile.Exuss));
   };
 
   const handleCancel = () => {

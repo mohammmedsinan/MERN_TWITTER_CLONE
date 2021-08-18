@@ -25,7 +25,6 @@ function StatusTweet() {
     Date: Date.now(),
   });
   const [data, setData] = useState(JSON.parse(localStorage.getItem('profile')));
-  console.log(data);
   useEffect(() => {
     setTweetContent({ ...tweetContent, Avatar: data.imageUrl, username: data.name });
   }, [tweetContent.username]);
@@ -51,7 +50,6 @@ function StatusTweet() {
       .then((e) => e.data)
       .then((e) => e.map((e) => setInfo(e)));
   }, []);
-  console.log(Info);
   return (
     <div style={{ padding: '14px 20px', display: 'flex', borderBottom: 'solid 1px #2f3336' }}>
       <div>

@@ -9,12 +9,12 @@ import './style.scss';
 
 function index({ match }) {
   const [ProfileInformation, setProfileInformation] = useState();
-  const [Exuss, setExuss] = useState(0);
+  const [Exuss, setExuss] = useState(false);
   useEffect(() => {
     GetYourProfile(match.params.username)
       .then((e) => e.data)
       .then((ProfileInfo) => setProfileInformation(ProfileInfo));
-  }, [match.params.username, Exuss]);
+  }, [match.params.username]);
 
   return (
     <div style={{ width: '45%' }}>
