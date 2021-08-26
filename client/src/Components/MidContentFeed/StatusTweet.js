@@ -1,7 +1,8 @@
-import { Avatar, Input } from 'antd';
+import { Avatar, Input, Upload, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { PostTheTweets, GetYourProfile } from '../../Api/index';
-import { Button } from 'antd';
+import { PostTheTweets, GetYourProfile, GitMeInfo } from '../../Api/index';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   FileImageOutlined,
   CalendarOutlined,
@@ -9,13 +10,13 @@ import {
   OrderedListOutlined,
   FileGifOutlined,
 } from '@ant-design/icons';
-import { Upload } from 'antd';
-import { useHistory } from 'react-router-dom';
 
 const { TextArea } = Input;
 function StatusTweet() {
   const [Info, setInfo] = useState([]);
   const history = useHistory();
+  const [data, setData] = useState(JSON.parse(localStorage.getItem('profile')));
+  const [infos, setIfnos] = useState(useSelector((state) => state.GlobalReducer));
   const [tweetContent, setTweetContent] = useState({
     username: '',
     TweetText: '',
@@ -24,10 +25,15 @@ function StatusTweet() {
     RealName: '',
     Date: Date.now(),
   });
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('profile')));
+
   useEffect(() => {
     setTweetContent({ ...tweetContent, Avatar: data.imageUrl, username: data.name });
   }, [tweetContent.username]);
+  useEffect(() => {
+    GetYourProfile(`${data.name}`)
+      .then((e) => e.data)
+      .then((e) => e.map((e) => setInfo(e)));
+  }, []);
   const propsUpload = {
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
     listType: 'picture',
@@ -45,20 +51,22 @@ function StatusTweet() {
       });
     },
   };
-  useEffect(() => {
-    GetYourProfile(`${data.name}`)
-      .then((e) => e.data)
-      .then((e) => e.map((e) => setInfo(e)));
-  }, []);
+  console.log(infos);
+
   return (
     <div style={{ padding: '14px 20px', display: 'flex', borderBottom: 'solid 1px #2f3336' }}>
       <div>
-        <Avatar
-          size="large"
-          src={Info.Avatar}
-          onClick={() => history.push(`/profile/${data.name}`)}
-          style={{ cursor: 'pointer' }}
-        />
+        {/* {infos &&
+          infos.map((e) => {
+            return (
+              <Avatar
+                src={e.Avatar}
+                size="large"
+                onClick={() => history.push(`/profile/${data.name}`)}
+                style={{ cursor: 'pointer' }}
+              />
+            );
+          })} */}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <TextArea

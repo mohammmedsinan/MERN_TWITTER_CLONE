@@ -49,3 +49,9 @@ export const UpdateProfile = async (req, res) => {
     console.log(error);
   }
 };
+
+export const GetMe = (req, res) => {
+  AccModal.find({ username: req.params.username }, (error, data) => {
+    data.map((e) => res.json({ Avatar: e.Avatar, username: e.username }));
+  });
+};

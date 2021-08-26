@@ -1,33 +1,28 @@
 import { Spin } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { GetYourProfile } from '../../Api';
+import React from 'react';
 import AvatarTwitter from './AvatarTwitter';
 import Headertwitter from './Headertwitter';
 import ImageTwitter from './imageTwitter';
 import SectionsTwitter from './SectionsTwitter';
 import './style.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { GlobalReducerAction } from '../../ReduxConfig/Reducers/GlobalReducer';
 
 function index({ match }) {
-  const [ProfileInformation, setProfileInformation] = useState();
-  const [Exuss, setExuss] = useState(false);
-  useEffect(() => {
-    GetYourProfile(match.params.username)
-      .then((e) => e.data)
-      .then((ProfileInfo) => setProfileInformation(ProfileInfo));
-  }, [match.params.username]);
-
+  const disptach = useDispatch();
+  disptach(GlobalReducerAction(match.params.username));
+  const ProfileInformation = useSelector((state) => state.GlobalReducer);
   return (
-    <div style={{ width: '45%' }}>
+    <div>
       {ProfileInformation ? (
         ProfileInformation.map((Profile) => {
-          let MoreInfo = { ...Profile, Exuss, setExuss };
           return (
-            <>
+            <div key={Profile.username}>
               <Headertwitter />
               <ImageTwitter Cover={Profile.CoverImg} />
-              <AvatarTwitter {...MoreInfo} />
+              <AvatarTwitter {...Profile} />
               <SectionsTwitter />
-            </>
+            </div>
           );
         })
       ) : (

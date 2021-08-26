@@ -4,7 +4,7 @@ import Header from './Header';
 import StatusTweet from './StatusTweet';
 function index() {
   return (
-    <div style={{ width: '50%' }}>
+    <div style={{ width: 'content-fit' }}>
       <Header />
       <StatusTweet />
       <CardTweetContent />

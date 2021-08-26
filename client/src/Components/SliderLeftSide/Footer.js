@@ -1,17 +1,18 @@
 import { Avatar } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { GetYourProfile } from '../../Api/index';
+import { GitMeInfo } from '../../Api/index';
 
 function Footer() {
   const [img, setImg] = useState(JSON.parse(localStorage.getItem('profile')));
   const [Info, setInfo] = useState([]);
+  const [data, setData] = useState();
   useEffect(() => {
-    GetYourProfile(`${img.name}`)
-      .then((e) => e.data)
-      .then((e) => e.map((e) => setInfo(e)));
+    img &&
+      GitMeInfo(img.name)
+        .then((e) => e.data)
+        .then((e) => setInfo(e));
   }, []);
-  console.log(Info);
   const history = useHistory();
   return (
     <div
@@ -23,7 +24,7 @@ function Footer() {
         paddingBottom: '20px',
         cursor: 'pointer',
       }}
-      onClick={() => history.push(`/profile/${img.name}`)}
+      onClick={() => history.push(`/profile/${Info.username}`)}
     >
       <span>
         <Avatar size="large" src={Info.Avatar} />
